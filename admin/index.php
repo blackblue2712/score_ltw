@@ -51,6 +51,29 @@
             
         }
 
+        let asyncSubmitFile = () => {
+            let data = new FormData();
+            let fileUpload = document.getElementById("fileEx").files[0];
+            data.append("file", fileUpload);
+            let promise = new Promise( (resolve, reject) => {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST" ,"./process.php", true);
+                xmlhttp.send(data);
+                xmlhttp.onreadystatechange = function () {
+                    if(this.status === 200 && this.readyState === 4) {
+                        if(this.response) {
+                            let res = JSON.parse(this.response);
+                            resolve(res);
+                        } else {
+                            reject("can not upload file");
+                        }
+                    }
+                }
+
+            });
+            return promise;
+        }
+
         
 
     </script>
