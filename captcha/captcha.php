@@ -5,8 +5,8 @@
 	
 	imagecolorallocate($captcha, 42, 194, 42);
 	
-	$content	= substr(md5(time()*20-1345),0,5);
-	$text		= imagettftext($captcha, 18, 5, 20, 30, imagecolorallocate($captcha, 15, 24, 15), 'vnavan.ttf', $content);
+	$content	= substr(md5(time()*20-1345), 0, 5);
+	$text		= imagettftext($captcha, 18, 5, 20, 35, imagecolorallocate($captcha, 15, 24, 15), 'vnavan.ttf', $content);
 	$_SESSION['code'] = $content;
 	imagejpeg($captcha);
 	

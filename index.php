@@ -61,18 +61,6 @@
 						<div>
 							<a class="nav-item" href="#">Home</a>
 						</div>
-						<!-- <div>
-							<a class="nav-item" href="#about">About</a>
-						</div>
-						<div>
-							<a class="nav-item" href="#product">Product</a>
-						</div>
-						<div>
-							<a class="nav-item" href="#exercise">Exercise</a>
-						</div>
-						<div>
-							<a class="nav-item has-child" href="#more">More &darr;</a>
-						</div> -->
 					</div>
 				<div class="container"></div>
 			</div>
@@ -80,14 +68,6 @@
 			<div class="body">
 				<div class="container">
 					<div class="row">
-						<!-- <section class="top">
-							<div class="cover-photo">
-								<div class="avatar">
-									<a href=<?php echo $picture?> target="_blank"><img src=<?php echo $picture?> alt="avt" class="img-sm img-circle img-avatar"></a>
-									<label class="mine-name"><?php echo "Dang Huu Nghia"?></label>
-								</div>
-							</div>
-						</section> -->
 						<section class="body">
 
                             <div id="product" class="box-model" style="padding-top: 40px;">
@@ -104,7 +84,10 @@
 									</div>
 									<div class="model-body-right">
 										<div id="list">
-											<h3>List products <input style="margin-left: 20px" type="text" placeholder="Type to find ..." oninput="ajaxFind(value)"></h3>
+											<h3>Type your id <input id="idstudent" style="margin-left: 20px" type="text" placeholder="Type to find ..."></h3>
+											
+											<h3><img src="./captcha/captcha.php" alt="captcha"> <input id="captcha" style="margin-left: 20px" type="text" placeholder="Enter captcha"></h3>
+											<button class="btn btn-primary" style="margin-bottom: 30px" onclick="initFind()">Fetch</button>
 											<div id="wrap-table">
 												<!-- AJAX LOADED -->
 											</div>

@@ -92,51 +92,107 @@ let changeUI = () => {
 //     ele.classList.remove("show");
 // }
 
-let ajaxFind = (plainText) => {
-    if(plainText.length !== 8) return;
+let initFind = async () => {
+    let plainText = document.getElementById("idstudent").value;
+    if(plainText.length !== 8) {
+        document.getElementById("idstudent").style.borderBottom = "1px solid red"
+        return;
+    }
+    document.getElementById("idstudent").style.borderBottom = "1px solid green"
+    let captcha = document.getElementById("captcha").value;
+
     let wrapList = document.getElementById("wrap-table");
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if(this.readyState === 4 && this.status === 200) {
-            console.log(this.response)
-            if(wrapList) {
-                let res = JSON.parse(this.response);
-                let xpr = "";
-                if(res.length > 0) {
-                    res.map( (pr, index) => {
-                        xpr += `<tr class="odd">
-                                    <td>${pr.id}</td>
-                                    <td>${pr.name}</td>
-                                    <td>${pr.gender}</td>
-                                    <td>${pr.score}</td>
-                                </tr>`;
-                    })
-                    let xhtml = `<table class="table-list"  style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 5%;">ID</th>
-                                            <th style="width: 38%;">Name</th>
-                                            <th style="width: 27%;">Gender</th>
-                                            <th style="width: 15%;">Score</th>
-                                            
-                                            </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${xpr}
-                                    </tbody>
-                                </table>`;
-    
-                    setTimeout( () => {
-                        wrapList.innerHTML = xhtml;
-                    },500);
-                } else {
-                    wrapList.innerHTML = res.message;
+
+    try {
+        let isVerify = await checkCaptcha(captcha);
+        if(isVerify.message === "success") {
+            data = await ajaxFind(plainText);
+        } else {
+            data = isVerify;
+        }
+
+        createTableFind(data, wrapList);
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+let checkCaptcha = code => {
+    let ipCaptcha = document.getElementById("captcha");
+
+    let promise = new Promise( (resolve, reject) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if(this.status === 200 && this.readyState === 4) {
+                if(this.response) {
+                    let res = JSON.parse(this.response);
+                    if(res.message !== "success") {
+                        ipCaptcha.style.borderBottom = "1px solid red";
+                        reject(res);
+                    } else {
+                        ipCaptcha.style.borderBottom = "1px solid green";
+                        resolve(res);
+                    }
                 }
             }
         }
+        xmlhttp.open("GET", "./captcha/verify.php?code=" + code, true);
+        xmlhttp.send();
+    })
+    return promise;
+}
+
+let ajaxFind = (plainText) => {
+    let promise = new Promise( (resolve, reject) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 200) {
+                if(this.response) {
+                    resolve(JSON.parse(this.response));
+                } else {
+                    reject("Empty record");
+                }
+            }
+        }
+        xmlhttp.open("GET", "./getScore.php?role=getQuery&q=" + plainText, true);
+        xmlhttp.send();
+    })
+    return promise;
+}
+
+let createTableFind = (res, wrapList) => {
+    console.log(res)
+    let xpr = "";
+    if(res.length > 0) {
+        res.map( (pr, index) => {
+            xpr += `<tr class="odd">
+                        <td>${pr.id}</td>
+                        <td>${pr.name}</td>
+                        <td>${pr.gender}</td>
+                        <td>${pr.score}</td>
+                    </tr>`;
+        })
+        let xhtml = `<table class="table-list"  style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">ID</th>
+                                <th style="width: 38%;">Name</th>
+                                <th style="width: 27%;">Gender</th>
+                                <th style="width: 15%;">Score</th>
+                                
+                                </tr>
+                        </thead>
+                        <tbody>
+                            ${xpr}
+                        </tbody>
+                    </table>`;
+
+        setTimeout( () => {
+            wrapList.innerHTML = xhtml;
+        },500);
+    } else {
+        wrapList.innerHTML = res.message;
     }
-    xmlhttp.open("GET", "./getScore.php?role=getQuery&q=" + plainText, true);
-    xmlhttp.send();
 }
 
 // let onChangeConfig = (element, styleType, value) => {
