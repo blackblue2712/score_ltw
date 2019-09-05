@@ -95,10 +95,10 @@ let changeUI = () => {
 let initFind = async () => {
     let plainText = document.getElementById("idstudent").value;
     if(plainText.length !== 8) {
-        document.getElementById("idstudent").style.borderBottom = "1px solid red"
+        document.getElementById("idstudent").style.borderBottom = "1px solid rgb(243, 99, 116)"
         return;
     }
-    document.getElementById("idstudent").style.borderBottom = "1px solid green"
+    document.getElementById("idstudent").style.borderBottom = "1px solid rgb(62, 239, 107)"
     let captcha = document.getElementById("captcha").value;
 
     let wrapList = document.getElementById("wrap-table");
@@ -112,6 +112,8 @@ let initFind = async () => {
         }
 
         createTableFind(data, wrapList);
+        // change captcha when fetch
+        document.getElementById('imgCaptcha').src= './captcha/captcha.php';
     } catch(err) {
         console.log(err)
     }
@@ -127,10 +129,10 @@ let checkCaptcha = code => {
                 if(this.response) {
                     let res = JSON.parse(this.response);
                     if(res.message !== "success") {
-                        ipCaptcha.style.borderBottom = "1px solid red";
+                        ipCaptcha.style.borderBottom = "1px solid rgb(243, 99, 116)";
                         reject(res);
                     } else {
-                        ipCaptcha.style.borderBottom = "1px solid green";
+                        ipCaptcha.style.borderBottom = "1px solid rgb(62, 239, 107)";
                         resolve(res);
                     }
                 }
@@ -279,3 +281,7 @@ let showConfig = () => {
 //     xmlhttp.open("GET", `./controllers/config.php?confBg=${confBg}&confCl=${confCl}&confSz=${confSz}`, true);
 //     xmlhttp.send();
 // }
+
+let changeCaptcha = () => {
+    document.getElementById('imgCaptcha').src= './captcha/captcha.php';
+}

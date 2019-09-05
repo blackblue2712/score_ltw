@@ -6,15 +6,35 @@ window.onload = () => {
 }
 let onSubmitForm = async () => {
     window.event.preventDefault();
+    let bar = document.getElementById("process-bar");
     try {
+        let currentWidth = parseInt(bar.style.width) || 0;
+        t = setInterval( () => {
+            let increaseWidth = 1;
+            if(currentWidth < 100) {
+                currentWidth += increaseWidth;
+                bar.style.width = currentWidth + "%";
+                // bar.innerHTML = currentWidth + "%";
+            } else {
+                clearInterval(t);
+            }
+        },10)
+
+
         let fileURL = await asyncSubmitFile();
         let fileData = await readFileAfterSubmit(fileURL);
         let finalRes = await writeDataToDb(fileData);
         
         console.log(fileURL, fileData, finalRes)
+        // bar.innerHTML = `Done: ${finalRes.done} - Fail: ${finalRes.fail}`;
         alert("Done, check the console");
     } catch( err ) {
         console.log(err);
+        clearInterval(t);
+        bar.style.width = "auto";
+        bar.style.background = "transparent";
+        bar.style.color = "red";
+        // bar.innerHTML = err;
     }
     
 }
@@ -31,7 +51,10 @@ let asyncSubmitFile = () => {
             if(this.status === 200 && this.readyState === 4) {
                 if(this.response) {
                     let res = JSON.parse(this.response);
-                    resolve(res);
+                    increaseProcess(33, true);
+                    setTimeout( () => {
+                        resolve(res);
+                    }, 500);
                 } else {
                     reject("can not upload file");
                 }
@@ -64,7 +87,11 @@ let readFileAfterSubmit = (url) => {
         
                     let first_sheet_name = workbook.SheetNames[0];
                     let worksheet = workbook.Sheets[first_sheet_name];
-                    resolve(XLSX.utils.sheet_to_json(worksheet, {raw: true}));
+                    setTimeout( () => {
+                        resolve(XLSX.utils.sheet_to_json(worksheet, {raw: true}));
+                    }, 500);
+                    
+                    increaseProcess(66, true);
                 } else {
                     reject("Can not read file");
                 }
@@ -90,7 +117,10 @@ let writeDataToDb = (data) => {
                 console.log(this.response)
                 if(this.response) {
                     let res = JSON.parse(this.response);
-                    resolve(res);
+                    increaseProcess(100, true);
+                    setTimeout( () => {
+                        resolve(res);
+                    }, 500);
                 } else {
                     reject("Can not write file to DB");
                 }
@@ -111,4 +141,26 @@ let signoutAjax = () => {
     }
     xmlhttp.open("GET", "./controllers/user/signout.php", true);
     xmlhttp.send();
-} 
+}
+
+let increaseProcess = (num, flag) => {
+    let t = null;
+    let bar = document.getElementById("process-bar");
+    if(!flag) {
+        let currentWidth = parseInt(bar.style.width) || 0;
+        t = setInterval( () => {
+            let increaseWidth = 1;
+            if(currentWidth < num) {
+                currentWidth += increaseWidth;
+                bar.style.width = currentWidth + "%";
+                // bar.innerHTML = currentWidth + "%";
+            } else {
+                clearInterval(t);
+            }
+        },10)
+    } else if(flag === true) {
+        clearInterval(t);
+        bar.style.width = num + "%";
+        // bar.innerHTML = num + "%";
+    }
+}

@@ -72,7 +72,7 @@
 
                             <div id="product" class="box-model" style="padding-top: 40px;">
 								<div class="model-header">
-									<h2 style="color: darkcyan;">Product</h2>
+									<h2 style="color: darkcyan;">Get score</h2>
 								</div>
 								<div class="model-body">
 									<div class="model-body-left">
@@ -86,8 +86,9 @@
 										<div id="list">
 											<h3>Type your id <input id="idstudent" style="margin-left: 20px" type="text" placeholder="Type to find ..."></h3>
 											
-											<h3><img src="./captcha/captcha.php" alt="captcha"> <input id="captcha" style="margin-left: 20px" type="text" placeholder="Enter captcha"></h3>
-											<button class="btn btn-primary" style="margin-bottom: 30px" onclick="initFind()">Fetch</button>
+											<h3><img src="./captcha/captcha.php" alt="captcha" id="imgCaptcha"> <input id="captcha" style="margin-left: 20px" type="text" placeholder="Enter captcha"></h3>
+											<div><a href="javascript:changeCaptcha()">Change captcha</a></div>
+											<button class="btn btn-primary" style="margin: 30px 0" onclick="initFind()">Fetch</button>
 											<div id="wrap-table">
 												<!-- AJAX LOADED -->
 											</div>

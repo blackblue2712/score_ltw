@@ -15,10 +15,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sheet</title>
     <link rel="stylesheet" type="text/css" href="../asset/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./asset/css/index.css">
 </head>
 <body>
     <div class="wrapper">
+        
         <div class="box-form" style="width: 500">
+            <div id="wrap-bar">
+                <div id="process-bar">
+                    
+                </div>
+            </div>
             <h2>Import file excel to db</h2>
             <form action="process.php" method="POST" enctype="multipart/form-data" id="main-form">
                 <div class="inputBox">
@@ -38,6 +45,7 @@
                 </div>
             </form>
         </div>
+        
     </div>
 
     <script src="./asset/js/xlsx.full.min.js"></script>

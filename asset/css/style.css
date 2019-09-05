@@ -26,7 +26,8 @@ body {
    padding: 40px;
    box-sizing: border-box;
    box-shadow: 0 15px 25px rgba(0, 0, 0, .8);
-   border-radius: 15px;
+   border-bottom-left-radius: 15px !important;
+   border-bottom-right-radius: 15px !important;
 }
 .box-form h2 {
    margin: 0 0 30px;

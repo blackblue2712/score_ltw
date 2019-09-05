@@ -199,7 +199,8 @@ section.body
 {
    min-height:30px;
    padding:0 10px;
-   box-sizing:border-box
+   box-sizing:border-box;
+   margin-bottom: 10px;
 }
 
 .model-header h3
