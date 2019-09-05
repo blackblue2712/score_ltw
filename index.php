@@ -6,39 +6,21 @@
     // print_r($_SESSION);
     // echo "</pre>";
     $conf = "";
-    $picture = 'https://res.cloudinary.com/ddrw0yq95/image/upload/v1565673576/qbay0vl6qylmg6lkxp8g.jpg';
-    if(isset($_SESSION["user"])) {
-        $id = $_SESSION["user"]["id"];
-        $username = $_SESSION["user"]["username"];
-        $picture = $_SESSION["user"]["picture"];
-        $gender = $_SESSION["user"]["gender"];
-        $career = $_SESSION["user"]["career"];
-        $hobbies = $_SESSION["user"]["hobbies"];
-        if($picture != "") {
-            $picture = URL_UPLOAD_USER . "/" . $picture;
-        } else {
-            $picture = 'https://res.cloudinary.com/ddrw0yq95/image/upload/v1565673576/qbay0vl6qylmg6lkxp8g.jpg';
-        }
+	$picture = 'https://res.cloudinary.com/ddrw0yq95/image/upload/v1565673576/qbay0vl6qylmg6lkxp8g.jpg';
+	
+	if(isset($_SESSION["config"])) {
+		$bg = $_SESSION["config"]["backgroundColor"];
+		$sz = $_SESSION["config"]["fontSize"];
+		$cl = $_SESSION["config"]["color"];
+		$conf = '<script type="text/javascript">
+					document.querySelector("section.body").style.backgroundColor = "#'.$bg.'";
+					document.querySelector("section.body").style.color = "#'.$cl.'";
+					document.querySelector("section.body").style.fontSize = "'.$sz.'px";
+			</script>';
+	}
 
-        $str_hobbies = '';
-        if($hobbies != "") {
-            $arr_hobbies = explode("-", $hobbies);
-            foreach($arr_hobbies as $value) {
-                $str_hobbies .= " - " . $value;
-            }
-		}
-		
-		if(isset($_SESSION["config"])) {
-			$bg = $_SESSION["config"]["backgroundColor"];
-			$sz = $_SESSION["config"]["fontSize"];
-			$cl = $_SESSION["config"]["color"];
-			$conf = '<script type="text/javascript">
-						document.querySelector("section.body").style.backgroundColor = "#'.$bg.'";
-						document.querySelector("section.body").style.color = "#'.$cl.'";
-						document.querySelector("section.body").style.fontSize = "'.$sz.'px";
-				</script>';
-		}
-		
+    if(isset($_SESSION["user"])) {
+			
     } else {
         // header("location: ./signin.php");
     }

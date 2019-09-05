@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="./asset/js/xlsx.full.min.js"></script>
     <script src="./asset/js/index.js"></script>
 </body>
 </html>

@@ -31,8 +31,6 @@ window.onload = function() {
         boxShowMes.classList.add("strict-hide");
     }
 
-    // ajax get products
-    getProducts();
 }
 
 
@@ -62,107 +60,50 @@ let changeUI = () => {
     }
 }
 
-let signout = () => {
-    let check = window.confirm("Are you want to sign out?");
-    if(check) {
-        window.location = "./controllers/user/signout.php";
-    }
-}
-
-let getProducts = () => {
-    let wrapList = document.getElementById("wrap-table");
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if(this.readyState === 4 && this.status === 200) {
-            if(wrapList) {
-                let res = JSON.parse(this.response);
-                let xpr = "";
-                if(res.length > 0) {
-                    console.log(res.length);
-                    res.map( (pr, index) => {
-                        // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
-                        xpr += `<tr class="odd">
-                                    <td>${pr.id}</td>
-                                    <td>${pr.name}</td>
-                                    <td>${pr.gender}</td>
-                                    <td>${pr.score}</td>
-                                </tr>`;
-                    })
-                    let xhtml = `<table class="table-list" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10%;">ID</th>
-                                            <th >Name</th>
-                                            <th style="width: 25%;">Gender</th>
-                                            <th style="width: 15%;">Score</th>
-                                            
-                                            </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${xpr}
-                                    </tbody>
-                                </table>`;
-    
-                    setTimeout( () => {
-                        wrapList.innerHTML = xhtml;
-                    },500);
-                } else {
-                    wrapList.innerHTML = res.message;
-                }
-            }
-        }
-    }
-
-    xmlhttp.open("GET", "./getScore.php?role=getall", true);
-    xmlhttp.send();
-}
-
-let toggleModel = id => {
-    let listBox = document.getElementById('list');
-    let formBox = document.getElementById('form');
-    if(id === 'list') {
-        listBox.classList.add('show-model-box');
-        listBox.classList.remove('hide-model-box');
-        formBox.classList.add('hide-model-box');
-    } else {
-        formBox.classList.add('show-model-box');
-        formBox.classList.remove('hide-model-box');
-        listBox.classList.add('hide-model-box');
-    }
-}
+// let toggleModel = id => {
+//     let listBox = document.getElementById('list');
+//     let formBox = document.getElementById('form');
+//     if(id === 'list') {
+//         listBox.classList.add('show-model-box');
+//         listBox.classList.remove('hide-model-box');
+//         formBox.classList.add('hide-model-box');
+//     } else {
+//         formBox.classList.add('show-model-box');
+//         formBox.classList.remove('hide-model-box');
+//         listBox.classList.add('hide-model-box');
+//     }
+// }
 
 
-let popupOpen = (e, src) => {
-    setTimeout( () => {
-        let ele = document.getElementById('popup');
-        ele.classList.add("show");
-        ele.classList.remove("hide");
-        ele.style.top = e.clientY - 100 + "px";
-        ele.style.left = e.clientX + 60 + "px";
-        ele.innerHTML = `<img src=${src}  style="max-width: 300px"/>`;
-    }, 1)
-}
+// let popupOpen = (e, src) => {
+//     setTimeout( () => {
+//         let ele = document.getElementById('popup');
+//         ele.classList.add("show");
+//         ele.classList.remove("hide");
+//         ele.style.top = e.clientY - 100 + "px";
+//         ele.style.left = e.clientX + 60 + "px";
+//         ele.innerHTML = `<img src=${src}  style="max-width: 300px"/>`;
+//     }, 1)
+// }
 
-let popupLeave = e => {
-    console.log("leave")
-    let ele = document.getElementById('popup');
-    ele.classList.add("hide");
-    ele.classList.remove("show");
-}
+// let popupLeave = e => {
+//     let ele = document.getElementById('popup');
+//     ele.classList.add("hide");
+//     ele.classList.remove("show");
+// }
 
 let ajaxFind = (plainText) => {
+    if(plainText.length !== 8) return;
     let wrapList = document.getElementById("wrap-table");
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
+            console.log(this.response)
             if(wrapList) {
                 let res = JSON.parse(this.response);
-                console.log(res)
                 let xpr = "";
                 if(res.length > 0) {
-                    console.log(res.length);
                     res.map( (pr, index) => {
-                        // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
                         xpr += `<tr class="odd">
                                     <td>${pr.id}</td>
                                     <td>${pr.name}</td>
@@ -170,7 +111,7 @@ let ajaxFind = (plainText) => {
                                     <td>${pr.score}</td>
                                 </tr>`;
                     })
-                    let xhtml = `<table class="table-list">
+                    let xhtml = `<table class="table-list"  style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%;">ID</th>
@@ -198,47 +139,47 @@ let ajaxFind = (plainText) => {
     xmlhttp.send();
 }
 
-let onChangeConfig = (element, styleType, value) => {
-    let eNode = document.querySelector(element);
-    console.log(value)
-    if(eNode) {
-        if(styleType === "background") {
-            eNode.style.background = value;
-        } else if(styleType === "color") {
-            eNode.style.color = value;
-        } else if(styleType === "font-family") {
-            eNode.style.fontFamily = value;
-        } else if(styleType === "font-size") {
-            eNode.style.fontSize = value + "px";
-        }
-    }
-}
+// let onChangeConfig = (element, styleType, value) => {
+//     let eNode = document.querySelector(element);
+//     console.log(value)
+//     if(eNode) {
+//         if(styleType === "background") {
+//             eNode.style.background = value;
+//         } else if(styleType === "color") {
+//             eNode.style.color = value;
+//         } else if(styleType === "font-family") {
+//             eNode.style.fontFamily = value;
+//         } else if(styleType === "font-size") {
+//             eNode.style.fontSize = value + "px";
+//         }
+//     }
+// }
 
-let defaultConfig = () => {
-    document.querySelector("section.body").style = "";
-    document.getElementById("bg-color").value = "#151313"
-    document.getElementById("text-color").value = "#ffffff"
-    document.getElementById("text-size").value = "16px";
+// let defaultConfig = () => {
+//     document.querySelector("section.body").style = "";
+//     document.getElementById("bg-color").value = "#151313"
+//     document.getElementById("text-color").value = "#ffffff"
+//     document.getElementById("text-size").value = "16px";
 
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if(this.status === 200 && this.readyState === 4) {
-            let res = JSON.parse(this.response);
-            let mess = `<div id=show-message class="show-mess">
-                                <div class="wrap-mess">
-                                    <div class="mess">
-                                        <p class="success">${res.message}</p>
-                                    </div>
-                                    <div class="close-mess" onclick="closeBox()">X</div>
-                                </div>
-                            </div>`;
-            document.getElementById("notifi").innerHTML = mess;
-        }
-    }
+//     let xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//         if(this.status === 200 && this.readyState === 4) {
+//             let res = JSON.parse(this.response);
+//             let mess = `<div id=show-message class="show-mess">
+//                                 <div class="wrap-mess">
+//                                     <div class="mess">
+//                                         <p class="success">${res.message}</p>
+//                                     </div>
+//                                     <div class="close-mess" onclick="closeBox()">X</div>
+//                                 </div>
+//                             </div>`;
+//             document.getElementById("notifi").innerHTML = mess;
+//         }
+//     }
 
-    xmlhttp.open("GET", `./controllers/config.php?default=true`, true);
-    xmlhttp.send();
-}
+//     xmlhttp.open("GET", `./controllers/config.php?default=true`, true);
+//     xmlhttp.send();
+// }
 
 let closeConfig = () => {
     let modelConfig = document.getElementsByClassName("modal-config-font")[0]
@@ -258,27 +199,27 @@ let showConfig = () => {
     modelConfig.classList.add("show-config");
 }
 
-let saveConfig = () => {
-    let confBg = document.getElementById("bg-color").value.replace("#", "");
-    let confCl = document.getElementById("text-color").value.replace("#", "");
-    let confSz = document.getElementById("text-size").value;
+// let saveConfig = () => {
+//     let confBg = document.getElementById("bg-color").value.replace("#", "");
+//     let confCl = document.getElementById("text-color").value.replace("#", "");
+//     let confSz = document.getElementById("text-size").value;
 
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if(this.status === 200 && this.readyState === 4) {
-            let res = JSON.parse(this.response);
-            let mess = `<div id=show-message class="show-mess">
-                                <div class="wrap-mess">
-                                    <div class="mess">
-                                        <p class="success">${res.message}</p>
-                                    </div>
-                                    <div class="close-mess" onclick="closeBox()">X</div>
-                                </div>
-                            </div>`;
-            document.getElementById("notifi").innerHTML = mess;
-        }
-    }
+//     let xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//         if(this.status === 200 && this.readyState === 4) {
+//             let res = JSON.parse(this.response);
+//             let mess = `<div id=show-message class="show-mess">
+//                                 <div class="wrap-mess">
+//                                     <div class="mess">
+//                                         <p class="success">${res.message}</p>
+//                                     </div>
+//                                     <div class="close-mess" onclick="closeBox()">X</div>
+//                                 </div>
+//                             </div>`;
+//             document.getElementById("notifi").innerHTML = mess;
+//         }
+//     }
 
-    xmlhttp.open("GET", `./controllers/config.php?confBg=${confBg}&confCl=${confCl}&confSz=${confSz}`, true);
-    xmlhttp.send();
-}
+//     xmlhttp.open("GET", `./controllers/config.php?confBg=${confBg}&confCl=${confCl}&confSz=${confSz}`, true);
+//     xmlhttp.send();
+// }

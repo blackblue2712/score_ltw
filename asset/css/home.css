@@ -438,7 +438,7 @@ tr
 
 
 input[type="text"], input[type="number"], textarea {
-    width: 500px;
+    width: calc(100% - 131px);
     padding: 5px;
     border-radius: 3px;
     background: transparent;

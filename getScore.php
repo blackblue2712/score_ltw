@@ -6,7 +6,11 @@
     if(isset($_GET["role"]) && $_GET["role"] == "getall") {
         $query = "SELECT * FROM group_5";
     } else if(isset($_GET["role"]) && $_GET["role"] == "getQuery") {
-        $query = "SELECT * FROM group_5 WHERE id LIKE '%".$_GET['q']."%'";
+        $patt = '/[\-\'\"\\/\,\.\*\<\>]/';
+        
+        $q = preg_replace($patt, "", $_GET['q']);
+
+       $query = "SELECT * FROM group_5 WHERE id LIKE '%".$q."%'";
     } else {
         return;
     }
