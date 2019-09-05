@@ -1,5 +1,8 @@
 window.onload = () => {
     let form = document.getElementById("main-form");
+
+    let signoutElement = document.getElementById("signmeout");
+    signoutElement.addEventListener("click", signoutAjax);
 }
 let onSubmitForm = async () => {
     window.event.preventDefault();
@@ -98,3 +101,14 @@ let writeDataToDb = (data) => {
     })
     return promise;
 }
+
+let signoutAjax = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if(this.status === 200 && this.readyState === 4) {
+            window.location = "../index.php";
+        }
+    }
+    xmlhttp.open("GET", "./controllers/user/signout.php", true);
+    xmlhttp.send();
+} 

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(isset($_SESSION["user"])) {
+
+    } else {
+        header("location: ../index.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +34,7 @@
                 <div style="margin-top: 20px; display: flex; align-items: center">
                     <input type="submit" name="btnSubmit" value="Submit" style="margin-right: 10px" id="submit-form" onclick="onSubmitForm()"/>
                     <input type="reset" name="" value="Reset"/>
+                    <a style="flex-grow: 1; text-align: right; z-index: 9999; color: blue" id="signmeout" href="#">Sign me out</a>
                 </div>
             </form>
         </div>

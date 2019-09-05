@@ -65,7 +65,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>CV - Dang Huu Nghia</title>
+	<title>Score</title>
 	<link rel="stylesheet" type="text/css" href="./asset/css/home.css">
 </head>
 <body>
@@ -98,17 +98,17 @@
 			<div class="body">
 				<div class="container">
 					<div class="row">
-						<section class="top">
+						<!-- <section class="top">
 							<div class="cover-photo">
 								<div class="avatar">
 									<a href=<?php echo $picture?> target="_blank"><img src=<?php echo $picture?> alt="avt" class="img-sm img-circle img-avatar"></a>
 									<label class="mine-name"><?php echo "Dang Huu Nghia"?></label>
 								</div>
 							</div>
-						</section>
+						</section> -->
 						<section class="body">
 
-                            <div id="product" class="box-model">
+                            <div id="product" class="box-model" style="padding-top: 40px;">
 								<div class="model-header">
 									<h2 style="color: darkcyan;">Product</h2>
 								</div>

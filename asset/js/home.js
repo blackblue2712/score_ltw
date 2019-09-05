@@ -74,37 +74,41 @@ let getProducts = () => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
-            console.log(this.response)
             if(wrapList) {
                 let res = JSON.parse(this.response);
                 let xpr = "";
-                res.map( (pr, index) => {
-                    // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
-                    xpr += `<tr class="odd">
-                                <td>${pr.id}</td>
-                                <td>${pr.name}</td>
-                                <td>${pr.gender}</td>
-                                <td>${pr.score}</td>
-                            </tr>`;
-                })
-                let xhtml = `<table class="table-list" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10%;">ID</th>
-                                        <th >Name</th>
-                                        <th style="width: 25%;">Gender</th>
-                                        <th style="width: 15%;">Score</th>
-                                        
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                    ${xpr}
-                                </tbody>
-                            </table>`;
-
-                setTimeout( () => {
-                    wrapList.innerHTML = xhtml;
-                },500);
+                if(res.length > 0) {
+                    console.log(res.length);
+                    res.map( (pr, index) => {
+                        // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
+                        xpr += `<tr class="odd">
+                                    <td>${pr.id}</td>
+                                    <td>${pr.name}</td>
+                                    <td>${pr.gender}</td>
+                                    <td>${pr.score}</td>
+                                </tr>`;
+                    })
+                    let xhtml = `<table class="table-list" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%;">ID</th>
+                                            <th >Name</th>
+                                            <th style="width: 25%;">Gender</th>
+                                            <th style="width: 15%;">Score</th>
+                                            
+                                            </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${xpr}
+                                    </tbody>
+                                </table>`;
+    
+                    setTimeout( () => {
+                        wrapList.innerHTML = xhtml;
+                    },500);
+                } else {
+                    wrapList.innerHTML = res.message;
+                }
             }
         }
     }
@@ -153,34 +157,40 @@ let ajaxFind = (plainText) => {
         if(this.readyState === 4 && this.status === 200) {
             if(wrapList) {
                 let res = JSON.parse(this.response);
+                console.log(res)
                 let xpr = "";
-                res.map( (pr, index) => {
-                    // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
-                    xpr += `<tr class="odd">
-                                <td>${pr.id}</td>
-                                <td>${pr.name}</td>
-                                <td>${pr.gender}</td>
-                                <td>${pr.score}</td>
-                            </tr>`;
-                })
-                let xhtml = `<table class="table-list">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;">ID</th>
-                                        <th style="width: 38%;">Name</th>
-                                        <th style="width: 27%;">Gender</th>
-                                        <th style="width: 15%;">Score</th>
-                                        
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                    ${xpr}
-                                </tbody>
-                            </table>`;
-
-                setTimeout( () => {
-                    wrapList.innerHTML = xhtml;
-                },500);
+                if(res.length > 0) {
+                    console.log(res.length);
+                    res.map( (pr, index) => {
+                        // let description = pr.description.length > 100 ? pr.description.substr(0, 100) + "..." : pr.description;
+                        xpr += `<tr class="odd">
+                                    <td>${pr.id}</td>
+                                    <td>${pr.name}</td>
+                                    <td>${pr.gender}</td>
+                                    <td>${pr.score}</td>
+                                </tr>`;
+                    })
+                    let xhtml = `<table class="table-list">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;">ID</th>
+                                            <th style="width: 38%;">Name</th>
+                                            <th style="width: 27%;">Gender</th>
+                                            <th style="width: 15%;">Score</th>
+                                            
+                                            </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${xpr}
+                                    </tbody>
+                                </table>`;
+    
+                    setTimeout( () => {
+                        wrapList.innerHTML = xhtml;
+                    },500);
+                } else {
+                    wrapList.innerHTML = res.message;
+                }
             }
         }
     }
