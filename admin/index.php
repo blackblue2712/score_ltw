@@ -1,10 +1,30 @@
 <?php
     session_start();
+    include_once("../define.php");
     if(isset($_SESSION["user"])) {
 
     } else {
-        header("location: ../index.php");
+        header("location: ./signin.php");
     }
+
+    $excelFiles = scandir("upload");
+    
+    unset($excelFiles[array_search(".", $excelFiles, true)]);
+    unset($excelFiles[array_search("..", $excelFiles, true)]);
+
+    $xhtml = "";
+    foreach($excelFiles as $key => $value) {
+        $url = './upload/'.$value;
+        $path = PATH_UPLOAD_EXCEL . '/' . $value;
+
+        $xhtml .= '<div id="'.$key.'"><a href="'.$url.'">'.$value.'</a>|<a href="javascript:previewEx(`'.$url.'`)">preview</a>|<a href="javascript:deleteEx(`'.$path.'`, `'.$key.'`)">delete</a></div>';
+    }
+
+    // delete file
+    if(isset($_GET["role"]) && $_GET["role"] == "delete") {
+        unlink($_GET["des"]);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +67,12 @@
         </div>
         
     </div>
-
+    <div id="preview-area">
+        <?php echo $xhtml?>
+        <div id="wrap-list"></div>
+    </div>
     <script src="./asset/js/xlsx.full.min.js"></script>
     <script src="./asset/js/index.js"></script>
+    <script src="./asset/js/preview.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     // print_r($_SERVER);
     // echo "</pre>";
 
-    $referer = $_SERVER["HTTP_REFERER"];
+    $referer = preg_replace("/index.php$/", "", $_SERVER["HTTP_REFERER"]);
 
     if(isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
         $fileName = $_FILES["file"]["tmp_name"];

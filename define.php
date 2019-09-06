@@ -1,14 +1,10 @@
 <?php
 
 define("PATH_ROOT"              , dirname(__FILE__));
-define("PATH_UPLOAD"            , PATH_ROOT . "/" . "public");
-define("PATH_UPLOAD_USER"       , PATH_UPLOAD . "/" . "user");
-define("PATH_UPLOAD_PRODUCT"    , PATH_UPLOAD . "/" . "product");
+define("PATH_UPLOAD_EXCEL"      , PATH_ROOT . "/admin/upload");
 
 define("URL_ROOT"              , "./");
-define("URL_UPLOAD"            , URL_ROOT  . "public");
-define("URL_UPLOAD_USER"       , URL_UPLOAD . "/" . "user");
-define("URL_UPLOAD_PRODUCT"    , URL_UPLOAD . "/" . "product");
+define("URL_UPLOAD_EXCEL"      , URL_ROOT  . "/admin/upload");
 
 // Define variable
 define("DB_HOST"                , "localhost");

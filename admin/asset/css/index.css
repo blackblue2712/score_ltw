@@ -10,8 +10,46 @@
 
 #process-bar {
     text-align: center;
-    border-top: 2px solid blue;
+    border-top: 3px solid blue;
     width: 0;
     height: 2px;
     border-radius: 15px;
 }
+
+#wrap-table {
+    border-top: 1px solid #007bff !important;
+    border-radius: 3px;
+ }
+ .table-list {
+    border-collapse: collapse;
+ }
+ .table-list thead {
+    
+ }
+ .table-list tr {
+    height: 40px;
+ }
+ .table-list td {
+    border: 1px solid #333333;
+ }
+ .table-list th {
+    border: 1px solid #333333;
+    color: #ccc;
+    padding: 8px;
+ }
+ 
+ .table-list tr.odd:hover {
+    background-color: #c7c7c7;
+ }
+
+ #preview-area {
+     position: absolute;
+     bottom: 50px;
+     /* z-index: 9999999; */
+ }
+
+ #wrap-list {
+    /* position: absolute;
+    bottom: 50px;
+    width: 100%; */
+ }

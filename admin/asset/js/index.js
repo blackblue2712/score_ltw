@@ -33,7 +33,7 @@ let onSubmitForm = async () => {
         clearInterval(t);
         bar.style.width = "auto";
         bar.style.background = "transparent";
-        bar.style.color = "red";
+        bar.style.borderTop = "3px solid red";
         // bar.innerHTML = err;
     }
     
@@ -66,6 +66,7 @@ let asyncSubmitFile = () => {
 }
 
 let readFileAfterSubmit = (url) => {
+    console.log(url)
     let fetchURL = url.des_file;
     let promise = new Promise( (resolve, reject) => {
         let xmlhttp = new XMLHttpRequest();
