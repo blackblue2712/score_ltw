@@ -29,7 +29,7 @@ let onSubmitForm = async () => {
         // bar.innerHTML = `Done: ${finalRes.done} - Fail: ${finalRes.fail}`;
         alert("Done, check the console");
     } catch( err ) {
-        console.log(err);
+        alert(err);
         clearInterval(t);
         bar.style.width = "auto";
         bar.style.background = "transparent";
@@ -50,8 +50,13 @@ let asyncSubmitFile = () => {
         xmlhttp.onreadystatechange = function () {
             if(this.status === 200 && this.readyState === 4) {
                 if(this.response) {
+                    console.log(this.response);
                     let res = JSON.parse(this.response);
                     increaseProcess(33, true);
+                    let rand = Date.now();
+                    let fileName = res.des_file.split("/")[res.des_file.split("/").length -1];
+                    let newEx = `<div id="${rand}"><a href="${res.des_file}">${fileName}</a>&nbsp;|&nbsp;<a href="javascript:previewEx('${res.des_file}')">preview</a></div>`
+                    document.getElementById("preview-area").innerHTML = newEx + document.getElementById("preview-area").innerHTML;
                     setTimeout( () => {
                         resolve(res);
                     }, 500);

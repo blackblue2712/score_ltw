@@ -87,7 +87,7 @@
 											<h3>Type your id <input id="idstudent" style="margin-left: 20px" type="text" placeholder="Type to find ..."></h3>
 											
 											<h3><img src="./captcha/captcha.php" alt="captcha" id="imgCaptcha"> <input id="captcha" style="margin-left: 20px" type="text" placeholder="Enter captcha"></h3>
-											<div><a href="javascript:changeCaptcha()">Change captcha</a></div>
+											<div><a href="javascript:changeCaptcha()" style="color: #0c79fb">Change captcha</a></div>
 											<button class="btn btn-primary" style="margin: 30px 0" onclick="initFind()">Fetch</button>
 											<div id="wrap-table">
 												<!-- AJAX LOADED -->

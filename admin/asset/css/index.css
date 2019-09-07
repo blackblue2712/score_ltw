@@ -44,12 +44,20 @@
 
  #preview-area {
      position: absolute;
-     bottom: 50px;
+     bottom: 35px;
      /* z-index: 9999999; */
  }
+
+ #preview-area a {
+    color: #da7979;
+ }
+ #preview-area a:hover {
+   color: #e6c2c2;
+}
 
  #wrap-list {
     /* position: absolute;
     bottom: 50px;
     width: 100%; */
  }
+

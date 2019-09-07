@@ -2,7 +2,6 @@ async function previewEx(url) {
     let wrapList = document.getElementById("wrap-list");
     try {
         let fileConent =  await readFile(url);
-        console.log(fileConent)
         createTableFind(fileConent, wrapList);
     } catch(err) {
         console.log(err);
@@ -60,7 +59,6 @@ let readFile = (url) => {
 }
 
 let createTableFind = (res, wrapList) => {
-    console.log(res)
     let xpr = "";
     if(res.length > 0) {
         res.map( (pr, index) => {
@@ -86,7 +84,7 @@ let createTableFind = (res, wrapList) => {
                         </tbody>
                     </table>`;
 
-        document.getElementById("preview-area").style.bottom = "-1069px";
+        document.getElementById("preview-area").style.top = "689px";
         wrapList.innerHTML = xhtml;
 
     } else {
