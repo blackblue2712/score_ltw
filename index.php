@@ -96,12 +96,21 @@
                                     </div>
 								</div>
                             </div>
-
-
                         </section>
 					</div>
+
+					<!-- Notify -->
+					<div id="announcement">
+						<!-- AJAX LOAD CONTENT FROM ELCIT SITE -->
+					</div>
+					<div id="notify">
+						<!-- AJAX LOAD CONTENT FROM QLHT CTU SITE -->
+					</div>
+
 				</div>
 			</div>
+
+			
 
 			<div class="footer" style="text-align: center;">
 				Liars &copy; 2019	

@@ -55,7 +55,7 @@ let asyncSubmitFile = () => {
                     increaseProcess(33, true);
                     let rand = Date.now();
                     let fileName = res.des_file.split("/")[res.des_file.split("/").length -1];
-                    let newEx = `<div id="${rand}"><a href="${res.des_file}">${fileName}</a>&nbsp;|&nbsp;<a href="javascript:previewEx('${res.des_file}')">preview</a></div>`
+                    let newEx = `<div id="${rand}"><a href="${res.des_file}">${fileName}</a>&nbsp;|&nbsp;<a href="javascript:previewEx('${res.des_file}')">view</a></div>`
                     document.getElementById("preview-area").innerHTML = newEx + document.getElementById("preview-area").innerHTML;
                     setTimeout( () => {
                         resolve(res);

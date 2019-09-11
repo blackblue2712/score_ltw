@@ -4,6 +4,10 @@ let onOpenNewTab = uri => {
 }
 window.onload = function() {
 
+    // crawl content from ctu site
+    getContentFromCtu();
+    getContentFromElcit();
+
     // Scroll on top
     window.onscroll = () => {
         let gotop = document.getElementById("scrollTop");
@@ -284,4 +288,38 @@ let showConfig = () => {
 
 let changeCaptcha = () => {
     document.getElementById('imgCaptcha').src= './captcha/captcha.php';
+}
+
+let getContentFromCtu = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if(this.status === 200 && this.readyState === 4 ) {
+            if(this.response) {
+                let res = JSON.parse(this.response);
+                console.log(res);
+                let xhtml = `<p><span style="font-size: medium;"><strong><span style="font-family: verdana, arial, helvetica, sans-serif; color: #ff0000;">Thông báo từ HTQL</span></strong></span></p><hr><ul>`;
+                res.map( el => {
+                    xhtml += `<li><a href='https://htql.ctu.edu.vn/htql/${el.links}'>${el.contents}</a>`;
+                })
+                xhtml += "</ul>";
+                document.getElementById("notify").innerHTML = xhtml;
+            }
+        }
+    }
+    xmlhttp.open("GET", "./utils/getContentFromCtu.php", true);
+    xmlhttp.send();
+}
+
+let getContentFromElcit = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if(this.status === 200 && this.readyState === 4 ) {
+            if(this.response) {
+                let res = JSON.parse(this.response);
+                document.getElementById("announcement").innerHTML = res;
+            }
+        }
+    }
+    xmlhttp.open("GET", "./utils/getContentElcit.php", true);
+    xmlhttp.send();
 }

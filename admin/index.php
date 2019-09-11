@@ -17,7 +17,7 @@
         $url = './upload/'.$value;
         $path = PATH_UPLOAD_EXCEL . '/' . $value;
 
-        $xhtml .= '<div id="'.$key.'"><a href="'.$url.'">'.$value.'</a>&nbsp;|&nbsp;<a href="javascript:previewEx(`'.$url.'`)">preview</a>&nbsp;|&nbsp;<a href="javascript:deleteEx(`'.$path.'`, `'.$key.'`)">delete</a></div>';
+        $xhtml .= '<div id="'.$key.'"><a href="'.$url.'">'.$value.'</a>&nbsp;|&nbsp;<a href="javascript:previewEx(`'.$url.'`)">view</a>&nbsp;|&nbsp;<a href="javascript:deleteEx(`'.$path.'`, `'.$key.'`)">delete</a></div>';
     }
 
     // delete file
