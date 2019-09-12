@@ -296,8 +296,7 @@ let getContentFromCtu = () => {
         if(this.status === 200 && this.readyState === 4 ) {
             if(this.response) {
                 let res = JSON.parse(this.response);
-                console.log(res);
-                let xhtml = `<p><span style="font-size: medium;"><strong><span style="font-family: verdana, arial, helvetica, sans-serif; color: #ff0000;">Thông báo từ HTQL</span></strong></span></p><hr><ul>`;
+                let xhtml = `<p><span style="font-size: medium;"><strong><span style="font-family: verdana, arial, helvetica, sans-serif; color: #ff0000;">THÔNG BÁO TỪ HTQL</span></strong></span></p><hr><ul>`;
                 res.map( el => {
                     xhtml += `<li><a href='https://htql.ctu.edu.vn/htql/${el.links}'>${el.contents}</a>`;
                 })
@@ -314,7 +313,7 @@ let getContentFromElcit = () => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if(this.status === 200 && this.readyState === 4 ) {
-            if(this.response) {
+            if(this.response != null) {
                 let res = JSON.parse(this.response);
                 document.getElementById("announcement").innerHTML = res;
             }
@@ -323,3 +322,4 @@ let getContentFromElcit = () => {
     xmlhttp.open("GET", "./utils/getContentElcit.php", true);
     xmlhttp.send();
 }
+

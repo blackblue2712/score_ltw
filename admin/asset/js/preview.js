@@ -86,6 +86,7 @@ let createTableFind = (res, wrapList) => {
 
         document.getElementById("preview-area").style.top = "689px";
         wrapList.innerHTML = xhtml;
+        console.log("inner");
 
     } else {
         wrapList.innerHTML = res.message;

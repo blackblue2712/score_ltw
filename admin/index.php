@@ -12,7 +12,7 @@
     unset($excelFiles[array_search(".", $excelFiles, true)]);
     unset($excelFiles[array_search("..", $excelFiles, true)]);
 
-    $xhtml = "";
+    $xhtml = "<div id='reviewDB'><a href='javascript:ajaxShowInDB()'>Review in DB</a></div>";
     foreach($excelFiles as $key => $value) {
         $url = './upload/'.$value;
         $path = PATH_UPLOAD_EXCEL . '/' . $value;

@@ -1,8 +1,16 @@
-window.onload = () => {
+window.onload = async () => {
     let form = document.getElementById("main-form");
 
     let signoutElement = document.getElementById("signmeout");
     signoutElement.addEventListener("click", signoutAjax);
+    // let wrapList = document.getElementById("wrap-list");
+
+    // try {
+    //     let data = await ajaxShowInDB();
+    //     createTableReview(data, wrapList);
+    // } catch(err) {  
+    //     console.log(err);
+    // }
 }
 let onSubmitForm = async () => {
     window.event.preventDefault();
@@ -168,5 +176,59 @@ let increaseProcess = (num, flag) => {
         clearInterval(t);
         bar.style.width = num + "%";
         // bar.innerHTML = num + "%";
+    }
+}
+
+let ajaxShowInDB = () => {
+    let promise = new Promise( (resolve, reject) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 200) {
+                if(this.response) {
+                    let res = JSON.parse(this.response);
+                    createTableReview(res, document.getElementById("wrap-list"));
+                    resolve(res);
+                } else {
+                    reject("Empty record");
+                }
+            }
+        }
+        xmlhttp.open("GET", "../getScore.php?role=getall", true);
+        xmlhttp.send();
+    })
+    return promise;
+}
+
+let createTableReview = (res, wrapList) => {
+    let xpr = "";
+    if(res.length > 0) {
+        res.map( (pr, index) => {
+            xpr += `<tr class="odd">
+                        <td>${pr.id}</td>
+                        <td>${pr.name}</td>
+                        <td>${pr.gender}</td>
+                        <td>${pr.score}</td>
+                    </tr>`;
+        })
+        let xhtml = `<table class="table-list"  style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">ID</th>
+                                <th style="width: 38%;">Name</th>
+                                <th style="width: 27%;">Gender</th>
+                                <th style="width: 15%;">Score</th>
+                                
+                                </tr>
+                        </thead>
+                        <tbody>
+                            ${xpr}
+                        </tbody>
+                    </table>`;
+
+        document.getElementById("preview-area").style.top = "689px";
+        wrapList.innerHTML = xhtml;
+
+    } else {
+        wrapList.innerHTML = res.message;
     }
 }
